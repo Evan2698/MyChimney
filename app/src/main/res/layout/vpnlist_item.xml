@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorListBackground"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_marginRight="20dp"
+    >
+    <TextView android:id="@+id/vpnName"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:text="172.16.45.23:8888"
+        android:textSize="20dp"
+        android:textColor="@color/colorAccent"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:typeface="serif"
+
+        />
+
+    <TextView android:id="@+id/dataflow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="↑384B ↓33B"
+        android:textSize="12dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop = "30dp"
+        android:textColor="@color/colorFlow"
+        android:layout_toLeftOf="@+id/vpndeletevpn"
+        android:gravity= "left"
+
+        />
+
+    <ImageButton android:id="@+id/vpndeletevpn"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_delete_item"
+        android:layout_toLeftOf="@+id/vpneditbtn"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+
+        />
+
+    <ImageButton android:id="@+id/vpneditbtn"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_edit_vpn"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight = "true"
+        />
+
+</RelativeLayout>
