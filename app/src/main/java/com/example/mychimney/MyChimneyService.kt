@@ -8,13 +8,14 @@ import android.content.IntentFilter
 import android.net.VpnService
 import android.os.ParcelFileDescriptor
 import android.util.Log
+
 import org.json.JSONObject
-import tun4android.IDataFlow
-import tun4android.ISocket
-import tun4android.Tun4android
+import tun4socks.BindSocket
+import tun4socks.Tun4socks
+import tun4socks.VPNParam
 import java.io.File
 
-class MyChimneyService : VpnService() {
+class MyChimneyService : VpnService(), BindSocket {
 
     companion object {
         const val INIT: Int = 0
@@ -22,7 +23,7 @@ class MyChimneyService : VpnService() {
         const val ERROR: Int = 2
 
 
-        const val NETADDRESS = "10.0.0.2"
+        const val NETADDRESS = "192.168.12.12"
         const val MTU = 1500
     }
 
@@ -30,26 +31,24 @@ class MyChimneyService : VpnService() {
     var launcher : LaunchReceiver? = null
     val  Tag :String  = "MyChimneyService"
     var vpnState : Int  = 0
-    var chsevice : Boolean = false
     var netcon : ParcelFileDescriptor? = null
-    var netstack: Boolean = false
     var exit : Boolean = false
+
+    override fun protect(filedescriptor: Long): Long {
+        var v = super.protect(filedescriptor.toInt())
+        if (v){
+            return 0
+        }
+        return -1
+    }
 
 
     override fun onCreate() {
         registerActionEventListener()
         super.onCreate()
-
-        Tun4android.register(ISocket { p0 ->
-            var r = this@MyChimneyService.protect(p0.toInt())
-            Log.i(Tag , "call back protect socket ")
-            r
-        }, IDataFlow { p0, p1 -> sendTrafficData(p0, p1) })
-
+        Log.i(Tag , "func is test !!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
         this.updateserviceState()
-
     }
-
 
     fun updateserviceState(){
 
@@ -110,14 +109,6 @@ class MyChimneyService : VpnService() {
             var pass = vpn.getString("password")
             var dns = vpn.getString("dns")
 
-
-            if (!this.chsevice) {
-                chsevice = Tun4android.startChimney(server.trim(),
-                    sport.toLong(),
-                    "127.0.0.1", 1080.toLong(),
-                    pass.trim(), CustomApp.instance.filesDir.absolutePath )
-            }
-
             if (this.netcon == null) {
 
                 var builder = Builder().addAddress(NETADDRESS, 0)
@@ -128,49 +119,34 @@ class MyChimneyService : VpnService() {
                 Log.i(Tag, "net connection launched!" + (this.netcon != null))
 
                 this.netcon = builder.establish()
-            }
 
-            if (!this.netstack && this.netcon != null) {
-                Tun4android.startNetstackService(this.netcon!!.fd.toLong(), "127.0.0.1:1080", dns)
-                Log.i(Tag, "netstack initialize successed")
-                this.netstack = true
+                var vpnpara = VPNParam()
+                vpnpara.fileDescriptor = this.netcon!!.fd.toLong()
+                vpnpara.passWD = pass
+                vpnpara.remoteServer = server
+                vpnpara.port = sport.toLong()
+                vpnpara.udpPort = sport.toLong()
+                vpnpara.callBack = this
+                var i = Tun4socks.startVPN(vpnpara)
+                if (0L == i) {
+                    this.vpnState = RUNNING
+                }
+                else {
+                    this.vpnState = ERROR
+               }
             }
-
-            if (this.chsevice  && this.netstack
-                && this.netcon != null) {
-                this.vpnState = RUNNING
-            }
-            else {
-                this.vpnState = ERROR
-            }
-
             Log.i(Tag, "vpn state is : " + vpnState)
-
-
         }
         return vpnState
     }
 
     private  fun stopService(){
         synchronized(this){
-
-            if (this.chsevice) {
-                Tun4android.stopChimney()
-                this.chsevice = false
-            }
-
-            if (this.netstack) {
-                Tun4android.stopNetStackService()
-                this.netstack = false
-            }
-
-            Thread.sleep(2000)
-
             if (this.netcon != null) {
+                Tun4socks.stopVPN()
                 this.netcon!!.close()
                 this.netcon = null
             }
-
             this.vpnState = INIT
         }
         this.sendServicestatus(this.vpnState)

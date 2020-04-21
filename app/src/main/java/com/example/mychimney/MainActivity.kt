@@ -3,8 +3,6 @@ package com.example.mychimney
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.BlendMode
-import android.graphics.PorterDuff
 import android.net.VpnService
 import android.os.Bundle
 import android.util.Log
