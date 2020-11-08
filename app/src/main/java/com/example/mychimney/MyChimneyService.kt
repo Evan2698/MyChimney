@@ -137,6 +137,9 @@ class MyChimneyService : VpnService(), BindSocket {
             }
             Log.i(Tag, "vpn state is : " + vpnState)
         }
+
+        this.sendServicestatus(this.vpnState)
+
         return vpnState
     }
 

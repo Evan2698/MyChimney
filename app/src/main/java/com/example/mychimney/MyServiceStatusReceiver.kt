@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
+import android.util.Log
 
 class MyServiceStatusReceiver() : BroadcastReceiver(), Parcelable {
     constructor(parcel: Parcel) : this() {
@@ -12,12 +13,16 @@ class MyServiceStatusReceiver() : BroadcastReceiver(), Parcelable {
 
     }
 
+    val  Tag :String  = "MyServiceStatusReceiver"
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
        var status = intent!!.getStringExtra("status")
         if (status != null){
             NotifyCenter.instance.updateConnectStatus(status)
         }
+
+        Log.i(Tag, "status: " + status)
 
         var mds = intent.getStringExtra("flow")
         if (mds != null) {

@@ -3,6 +3,7 @@ package com.example.mychimney
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.VpnService
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), UIUpdateInterface , UpdateConnectStatu
 
     var servicestate : String = "-1"
     val Tag :String = "MainActivity"
+    var launcher : MyServiceStatusReceiver = MyServiceStatusReceiver()
 
     override fun register(v: UIUpdateInterface) {
         NotifyCenter.instance.register(v)
@@ -35,6 +37,17 @@ class MainActivity : AppCompatActivity(), UIUpdateInterface , UpdateConnectStatu
         NotifyCenter.instance.unregister(v)
 
     }
+
+    fun registerActionEventListener(){
+        var filter =  IntentFilter()
+        filter.addAction("com.chineseelements.CHIMNEY")
+        registerReceiver(this.launcher!!, filter)
+    }
+
+    fun unRegisterActionEventListener(){
+        unregisterReceiver(this.launcher!!)
+    }
+
 
     override fun updateConnectStatus(status: String) {
 
@@ -76,6 +89,7 @@ class MainActivity : AppCompatActivity(), UIUpdateInterface , UpdateConnectStatu
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        registerActionEventListener()
         NotifyCenter.instance.register(this)
         NotifyCenter.instance.registerSatusListener(this)
 
@@ -181,6 +195,7 @@ class MainActivity : AppCompatActivity(), UIUpdateInterface , UpdateConnectStatu
 
     override fun onDestroy() {
         super.onDestroy()
+        unRegisterActionEventListener()
         NotifyCenter.instance.unregister(this)
     }
 
