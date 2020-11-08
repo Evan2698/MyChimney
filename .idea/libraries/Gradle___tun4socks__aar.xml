@@ -4,9 +4,10 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9e4f8fc06f1210dd2cb5c0fcb33780a/tun4socks/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9e4f8fc06f1210dd2cb5c0fcb33780a/tun4socks/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6a5268dbb9179c1335c1cf4aa25335d4/tun4socks/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/340a600d83c06a60c546ef5fc2d4d9be/jetified-tun4socks/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/340a600d83c06a60c546ef5fc2d4d9be/jetified-tun4socks/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/340a600d83c06a60c546ef5fc2d4d9be/jetified-tun4socks/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53ebd06f05642257b339c45e5d481523/jetified-tun4socks/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53ebd06f05642257b339c45e5d481523/jetified-tun4socks/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53ebd06f05642257b339c45e5d481523/jetified-tun4socks/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
