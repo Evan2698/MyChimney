@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MyChimney.iml" filepath="$PROJECT_DIR$/MyChimney.iml" group="MyChimney" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="MyChimney/app" />
+      <module fileurl="file://$PROJECT_DIR$/MyChimney.iml" filepath="$PROJECT_DIR$/MyChimney.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyChimney.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyChimney.app.iml" />
     </modules>
   </component>
 </project>

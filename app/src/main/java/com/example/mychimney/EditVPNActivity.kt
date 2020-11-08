@@ -23,6 +23,7 @@ class EditVPNActivity : AppCompatActivity() {
 
         if (isNew) {
             remotedns.setText("1.1.1.1")
+            this.passwd.setText("Evan\$%#@!#\$@!123")
         }
         else {
             var position = this.intent.getIntExtra("data", -1)
