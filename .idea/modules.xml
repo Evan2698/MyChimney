@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyChimney.iml" filepath="$PROJECT_DIR$/MyChimney.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyChimney.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyChimney.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyChimney.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyChimney.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyChimney.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyChimney.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyChimney.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyChimney.app.unitTest.iml" />
     </modules>
   </component>
 </project>

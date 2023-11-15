@@ -19,6 +19,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,7 @@
         </activity>
         <activity android:name=".EditVPNActivity"></activity>
 
-        <receiver android:name=".MyServiceStatusReceiver" >
+        <receiver android:name=".MyServiceStatusReceiver"  android:exported="true">
             <intent-filter>
                 <action android:name="com.chineseelements.CHIMNEY">
                 </action>
